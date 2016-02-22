@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin:'application'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = "com.dg.DataGenerator"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+
+dependencies {
+    compile('com.datastax.cassandra:cassandra-driver-core:2.1.8')
+}
