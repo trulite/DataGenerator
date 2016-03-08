@@ -39,10 +39,10 @@ CREATE TABLE cassandra_load.summary (
 
 
 CREATE CUSTOM INDEX summary_idx ON cassandra_load.summary (stargate) USING 'com.tuplejump.stargate.RowIndex' 
-WITH OPTIONS = {'sg_options': '{
+WITH OPTIONS = {'sg_options': '{ insertOnly: "true",
 fields : {
-	symbol    : {type : "string"},
-	destination  : {type : "string"},
+	symbol    : {type : "string",striped:"also"},
+	destination  : {type : "string",striped:"also"},
 	side  : {type : "text"},
 	ticket_id : {type : "string"},
 	tif : {type : "string"},

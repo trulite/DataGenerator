@@ -59,7 +59,7 @@ public class DataGenerator {
                 dg.generateData(SYMBOLS[symbolIndex], multiplier * M * 10);
                 System.out.println(messageCount);
 
-                if (messageCount > 6500000) {
+                if (messageCount > 500000) {
                     break;
                 }
             }

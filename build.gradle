@@ -15,4 +15,5 @@ repositories {
 
 dependencies {
     compile('com.datastax.cassandra:cassandra-driver-core:2.1.8')
+    compile('joda-time:joda-time:1.6.2')
 }

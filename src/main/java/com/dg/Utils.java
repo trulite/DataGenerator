@@ -46,7 +46,7 @@ public class Utils {
         }
 
         public void logTime(String prefix) {
-            System.out.println(prefix + " - took [" + time() + "] milli seconds");
+            System.out.println(prefix + " - took [" + time()/1000 + "] seconds");
         }
 
         public void endLogTime(String prefix) {

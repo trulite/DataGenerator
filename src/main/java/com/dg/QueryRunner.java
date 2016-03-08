@@ -32,10 +32,10 @@ class RunnableDemo implements Runnable {
         System.out.println("Running week-" + week);
         try {
 
-            StringBuilder sb = new StringBuilder("SELECT * FROM cassandra_load.summary WHERE tenant_id='GIC' and year=2015 and month=2 and week_of_month=");
+            StringBuilder sb = new StringBuilder("SELECT * FROM cassandra_load.messages WHERE tenant_id='GIC' and year=2015 and month=2 and week_of_month=");
             sb.append((week % 3) + 1);
 
-            sb.append(" and stargate ='{ filter : { type : \"boolean\", not: [{type : \"match\", field : \"status\", value : \"New\"}], should: [{type : \"match\", field : \"symbol\", value : \"BAML\"}, {type : \"match\", field : \"symbol\", value : \"AFL\"}]}}' LIMIT 2000;");
+            sb.append(" and stargate ='{ filter : {type : \"match\", field : \"destination\", value : \"PAPER\"} }' LIMIT 2000;");
 
             Statement statement = new SimpleStatement(sb.toString());
             statement.setConsistencyLevel(ConsistencyLevel.TWO);
@@ -48,11 +48,12 @@ class RunnableDemo implements Runnable {
         System.out.println("Thread week-" + week + " exiting.");
     }
 
-    public void start() {
+    public void start() throws InterruptedException {
         System.out.println("Starting week-" + week);
         if (t == null) {
             t = new Thread(this, "week-" + week);
             t.start();
+            t.join();
         }
     }
 
@@ -60,7 +61,7 @@ class RunnableDemo implements Runnable {
 
 public class QueryRunner {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException {
 
         int numThreads = 30;
 
